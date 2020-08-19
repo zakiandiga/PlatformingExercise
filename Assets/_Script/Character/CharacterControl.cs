@@ -23,6 +23,7 @@ public class CharacterControl : MonoBehaviour
 
 
     Vector3 direction = Vector3.zero;
+    Vector3 moveDir = Vector3.zero;
     
     [Range(0, 1)] public float slide = 0.9f;
 
@@ -38,17 +39,19 @@ public class CharacterControl : MonoBehaviour
     void Update()
     {
         float moveInput = Input.GetAxisRaw("Horizontal");
+        float jumpInput = 0;
         //float faceDir = moveInput.normalized;
-        Vector3 moveDir = new Vector3(moveInput, 0, 0);
+        moveDir = new Vector3(moveInput, jumpInput, 0);
 
         //Vector3 vInput = control.velocity;
 
         if (control.isGrounded)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetAxisRaw("Jump") != 0)
             {
                 //anim.SetTrigger("jump"); //ANIMATOR jump trigger
-                moveDir.y = jumpForce;
+                //moveDir.y = jumpForce;
+                jumpInput = jumpForce;
             }
 
         }
